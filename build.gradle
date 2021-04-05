@@ -12,7 +12,6 @@ subprojects {
 
     repositories {
         mavenCentral()
-
         maven { url "https://jitpack.io" }
     }
 
@@ -31,6 +30,17 @@ subprojects {
 
     test {
         systemProperty "file.encoding", "utf-8"
+        outputs.upToDateWhen { false }
+        afterTest { TestDescriptor test, TestResult result ->
+            if (result.resultType == TestResult.ResultType.FAILURE) {
+                def message = result.exception?.message ?: "Wrong answer"
+                def lines = message.readLines()
+                println "#educational_plugin FAILED + " + lines[0]
+                lines[1..-1].forEach { line ->
+                    println "#educational_plugin" + line
+                }
+            }
+        }
     }
 
     compileJava.options.encoding = 'utf-8'
@@ -39,15 +49,6 @@ subprojects {
     }
 }
 
-project(':util') {
-    dependencies {
-        implementation 'com.github.hyperskill:hs-test:release-SNAPSHOT'
-    }
-}
-
-configure(subprojects.findAll { it.name != 'util' }) {
-    dependencies {
-        testImplementation project(':util').sourceSets.main.output
-        testImplementation project(':util').sourceSets.test.output
-    }
+wrapper {
+    gradleVersion = '6.6.1'
 }
