@@ -317,9 +317,9 @@ files:
         }
     }
   learner_created: false
-- name: src/CheckCheck.java
-  visible: true
-  learner_created: true
 feedback_link: https://hyperskill.org/projects/48/stages/257/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 07 Apr 2021 18:31:09 UTC
 record: -1
