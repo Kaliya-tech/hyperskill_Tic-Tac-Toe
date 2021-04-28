@@ -432,6 +432,9 @@ files:
         }
     }
   learner_created: false
+- name: src/tictactoe/App.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/48/stages/259/implement#comment
 status: Unchecked
 record: -1

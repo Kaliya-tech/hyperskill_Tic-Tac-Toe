@@ -5,16 +5,28 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-      System.out.println("Enter cells:");
 
         Scanner scanner = new Scanner(System.in);
-        String str = scanner.nextLine();
+        String str = "         ";
 
         char[][] arr = parseString(str);
         drawField(arr);
 
         promptMakeMove(arr, scanner);
-        //  System.out.println(((int)['3']));
+
+       // TODO- switch case()
+
+
+        showGameState(arr);
+        promptMakeMove(arr, scanner);
+        makeMoveO(arr, row, col, scanner);
+
+    }
+
+    private static void switchMove() {
+        int count = 0;
+   //     if (makeMoveX(arr, row, col, scanner);
+
     }
 
     private static char[][] parseString(String str) {
@@ -28,13 +40,13 @@ public class Main {
         return arr;
     }
 
-    public static void setSymbol (char[][] arr, char ch, char row, char col) {
+    public static void setSymbol(char[][] arr, char ch, char row, char col) {
         int rowNum = Character.getNumericValue(row) - 1;
         int colNum = Character.getNumericValue(col) - 1;
         arr[rowNum][colNum] = ch;
     }
 
-    public static void drawField (char[][] arr) {
+    public static void drawField(char[][] arr) {
         System.out.println("---------");
         for (int i = 0; i < arr.length; i++) { // draw matrix
             System.out.print("| ");
@@ -49,38 +61,49 @@ public class Main {
         System.out.println("---------");
     }
 
-
-    public static void promptMakeMove (char[][] arr, Scanner scanner) {
+    public static void promptMakeMove(char[][] arr, Scanner scanner) {
         System.out.println("Enter the coordinates:");
         String input = scanner.nextLine();
-        char row =  input.charAt(0);
+        char row = input.charAt(0);
         char col = input.charAt(2);
 
         checkInput(arr, row, col, scanner);
     }
 
-
-    public static void checkInput (char[][] arr, char row, char col, Scanner scanner) {
+    public static void checkInput(char[][] arr, char row, char col, Scanner scanner) {
         if (isNotNumber(row) || isNotNumber(col)) {
             System.out.println("You should enter numbers!");
             promptMakeMove(arr, scanner);
-        } else if(isNumberNotFits(row) || isNumberNotFits(col)) {
+        } else if (isNumberNotFits(row) || isNumberNotFits(col)) {
             System.out.println("Coordinates should be from 1 to 3!");
             promptMakeMove(arr, scanner);
         } else if (isCellFilled(arr, row, col)) {
             System.out.println("This cell is occupied! Choose another one!");
             promptMakeMove(arr, scanner);
         } else {
-            setSymbol(arr, 'X', row, col);
+            int count = 0;
+          //  if (promptMakeMove();
+            setSymbol(arr, , row, col);
             drawField(arr);
+            promptMakeMove(arr, scanner);
         }
     }
 
-    private static boolean isNotNumber (char ch) {
+    public static void makeMoveX(char[][] arr, char row, char col, Scanner scanner) {
+        setSymbol(arr, 'X', row, col);
+        drawField(arr);
+    }
+
+    public static void makeMoveO(char[][] arr, char row, char col, Scanner scanner) {
+        setSymbol(arr, 'O', row, col);
+        drawField(arr);
+    }
+
+    private static boolean isNotNumber(char ch) {
         String symbols = "0123456789";
         int counter = 0;
-        for(int i = 0; i < symbols.length(); i++) {
-            if(ch == symbols.charAt(i)) {
+        for (int i = 0; i < symbols.length(); i++) {
+            if (ch == symbols.charAt(i)) {
                 counter++;
                 break;
             }
@@ -92,7 +115,7 @@ public class Main {
         int rowNum = Character.getNumericValue(row) - 1;
         int colNum = Character.getNumericValue(col) - 1;
 
-        if (arr[rowNum][colNum] != '_') {
+        if (arr[rowNum][colNum] != ' ') {
             return true;
         }
         return false;
@@ -103,9 +126,8 @@ public class Main {
     }
 
 
-
-    private static void showGameState(String str) {
-        char[][] arr = parseString(str);
+    private static void showGameState(char[][] arr) {
+        //char[][] arr = parseString(str);
 
         if ((checkForWinner(arr, 'X') && checkForWinner(arr, 'O'))
                 || checkForDifference(arr)) {
@@ -120,8 +142,6 @@ public class Main {
             System.out.println("Game not finished");
         }
     }
-
-
 
     private static boolean checkForWinner(char[][] arr, char ch) {
         if ((checkForWinnerColumns(arr, ch) || checkForWinnerRows(arr, ch) || checkForWinnerDiagonals(arr, ch))) {
@@ -160,7 +180,7 @@ public class Main {
 
     private static boolean checkForWinnerRows(char[][] arr, char ch) {
 
-        for(int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             int counter = 0;
             for (int j = 0; j < arr[0].length; j++) {
                 if (arr[i][j] == ch) {
@@ -176,7 +196,7 @@ public class Main {
 
     private static boolean checkForWinnerColumns(char[][] arr, char ch) {
 
-        for(int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             int counter = 0;
             for (int j = 0; j < arr[0].length; j++) {
                 if (arr[j][i] == ch) {
@@ -190,12 +210,11 @@ public class Main {
         return false;
     }
 
-    private static boolean checkForWinnerDiagonals (char[][] arr, char ch) {
+    private static boolean checkForWinnerDiagonals(char[][] arr, char ch) {
         if ((arr[0][0] == ch && arr[1][1] == ch && arr[2][2] == ch)
-                || (arr[0][2] == ch && arr[1][1] == ch && arr[2][0] == ch )) {
+                || (arr[0][2] == ch && arr[1][1] == ch && arr[2][0] == ch)) {
             return true;
         }
         return false;
     }
-
 }
