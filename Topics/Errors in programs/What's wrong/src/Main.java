@@ -1,4 +1,4 @@
-port java.util.Scanner;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,6 +6,6 @@ public class Main {
 
         int number = scanner.nextInt();
 
-        System.out.println(nextInt);
+        System.out.println(number + 1);
     }
 }

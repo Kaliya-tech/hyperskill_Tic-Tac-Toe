@@ -6,16 +6,16 @@
   <p>Implement the method <code class="language-java">next</code> that increases the value of minutes by 1. The minutes must be reset to zero when the current hour ends. Do not forget to change the hours as well.</p> 
   <p>Do not make the fields and methods <code class="language-java">private</code>.</p> 
   <p>Let's consider the examples.</p> 
-  <p>1) The initial time of a <code class="language-java">clock</code>object is 12:00, i.e. <code class="language-java">hours = 12</code> and <code class="language-java">minutes = 0</code>. Applying method <code class="language-java">next</code> to the <code class="language-java">clock</code> changes its field <code class="language-java">minutes</code> to <code class="language-java">minutes = 1</code>. In this way, time is 12:01.</p> 
-  <pre><code class="language-java">Clock clock = new Clock(); // time is 12:00
-clock.next(); // time is 12:01</code></pre> 
-  <p> 2) The initial time of a <code class="language-java">clock</code> object is 10:59, i.e. <code class="language-java">hours = 10</code> and <code class="language-java">minutes = 59</code>. After applying method <code class="language-java">next</code> to the <code class="language-java">clock</code> its fields look like <code class="language-java">hours = 11</code> and <code class="language-java">minutes = 0</code>, i.e. time is 11:00 now.</p> 
+  <p>1) The initial time of the object <code class="language-java">clock</code> is 12:00, i.e., <code class="language-java">hours = 12</code> and <code class="language-java">minutes = 0</code>. Applying the <code class="language-java">next</code> method to the <code class="language-java">clock</code>, we change its field <code class="language-java">minutes</code> to <code class="language-java">minutes = 1</code>. In this way, the time is 12:01.</p> 
+  <pre><code class="language-java">Clock clock = new Clock(); // the time is 12:00
+clock.next(); // the time is 12:01</code></pre> 
+  <p> 2) The initial time of a <code class="language-java">clock</code> object is 10:59, i.e. <code class="language-java">hours = 10</code> and <code class="language-java">minutes = 59</code>. After applying the <code class="language-java">next</code> method to the <code class="language-java">clock</code>, we turn its fields to <code class="language-java">hours = 11</code> and <code class="language-java">minutes = 0</code>, i.e., the time is 11:00 now.</p> 
   <pre><code class="language-java">Clock clock = new Clock();
 clock.hours = 10;
 clock.minutes = 59;
 // time is 10:59
 
-clock.next(); // time is 11:00</code></pre> 
+clock.next(); // the time is 11:00</code></pre> 
   <p> </p> 
   <p>Here is an example of a clock you are supposed to imitate.</p> 
   <p> </p> 
