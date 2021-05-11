@@ -11,17 +11,20 @@ public class Main {
 
         char[][] arr = parseString(str);
         drawField(arr);
+        //promptMakeMove(arr, scanner);
+        String state;
+        if (drawField(arr) {
+            state = "continue";
+        } else if () {}
 
-        promptMakeMove(arr, scanner);
+        switch(state) {
+            case "continue":
+                promptMakeMove(arr);
 
-       // TODO- switch case()
-
-
-        showGameState(arr);
-        promptMakeMove(arr, scanner);
-        makeMoveO(arr, row, col, scanner);
-
+        }
     }
+
+
 
     private static void switchMove() {
         int count = 0;
@@ -39,6 +42,14 @@ public class Main {
         }
         return arr;
     }
+
+    public static void checkMoveTurn(char[][] arr, char ch, char row, char col) {
+        if(checkForDraw(arr)) {
+
+        }
+    }
+
+
 
     public static void setSymbol(char[][] arr, char ch, char row, char col) {
         int rowNum = Character.getNumericValue(row) - 1;
@@ -80,21 +91,22 @@ public class Main {
         } else if (isCellFilled(arr, row, col)) {
             System.out.println("This cell is occupied! Choose another one!");
             promptMakeMove(arr, scanner);
-        } else {
+        }
+        /*else {
             int count = 0;
           //  if (promptMakeMove();
-            setSymbol(arr, , row, col);
+            setSymbol(arr, ch, row, col);
             drawField(arr);
             promptMakeMove(arr, scanner);
-        }
+        }*/
     }
 
-    public static void makeMoveX(char[][] arr, char row, char col, Scanner scanner) {
+    public static void makeMoveX(char[][] arr, char row, char col) {
         setSymbol(arr, 'X', row, col);
         drawField(arr);
     }
 
-    public static void makeMoveO(char[][] arr, char row, char col, Scanner scanner) {
+    public static void makeMoveO(char[][] arr, char row, char col) {
         setSymbol(arr, 'O', row, col);
         drawField(arr);
     }
@@ -139,7 +151,8 @@ public class Main {
         } else if (checkForDraw(arr)) {
             System.out.println("Draw");
         } else {
-            System.out.println("Game not finished");
+            drawField(arr);
+
         }
     }
 

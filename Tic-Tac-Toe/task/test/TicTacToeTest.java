@@ -4,6 +4,7 @@ import org.hyperskill.hstest.testcase.CheckResult;
 import org.hyperskill.hstest.testcase.TestCase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -13,12 +14,15 @@ enum FieldState {
 
     static FieldState get(char symbol) {
         switch (symbol) {
-            case 'X': return X;
-            case 'O': return O;
+            case 'X':
+                return X;
+            case 'O':
+                return O;
             case ' ':
             case '_':
                 return FREE;
-            default: return null;
+            default:
+                return null;
         }
     }
 }
@@ -65,8 +69,7 @@ class TicTacToeField {
                 if (field[i][j] != other.field[i][j]) {
                     if (field[i][j] == FieldState.FREE && !improved) {
                         improved = true;
-                    }
-                    else {
+                    } else {
                         return false;
                     }
                 }
@@ -183,7 +186,7 @@ class TicTacToeField {
 
             int y = 0;
             for (String line : lines) {
-                char[] cols = new char[] {
+                char[] cols = new char[]{
                     line.charAt(2),
                     line.charAt(4),
                     line.charAt(6)
@@ -201,7 +204,8 @@ class TicTacToeField {
                 y++;
             }
 
-            return new TicTacToeField(field);
+            TicTacToeField ticTacToeField = new TicTacToeField(field);
+            return ticTacToeField;
         } catch (Exception ex) {
             return null;
         }
@@ -239,11 +243,26 @@ class TicTacToeField {
         return fields;
     }
 
+    public int getXCount() {
+
+        return (int) Arrays.stream(field)
+            .flatMap(Arrays::stream)
+            .filter(field -> field != null && field.equals(FieldState.X))
+            .count();
+    }
+
+    public int getOCount() {
+        return (int) Arrays.stream(field)
+            .flatMap(Arrays::stream)
+            .filter(field -> field != null && field.equals(FieldState.O))
+            .count();
+    }
 }
 
 
 class Clue {
     int x, y;
+
     Clue(int x, int y) {
         this.x = x;
         this.y = y;
@@ -252,7 +271,7 @@ class Clue {
 
 public class TicTacToeTest extends StageTest<Clue> {
 
-    static String[] inputs = new String[] {
+    static String[] inputs = new String[]{
         "1 1", "1 2", "1 3",
         "2 1", "2 2", "2 3",
         "3 1", "3 2", "3 3"
@@ -338,6 +357,10 @@ public class TicTacToeTest extends StageTest<Clue> {
                         "other one is not a continuation " +
                         "of the other (they differ more than in two places).");
             }
+
+            if (Math.abs(curr.getXCount() - curr.getOCount()) > 1) {
+                return CheckResult.wrong("Wrong number of X's and O's in the field!");
+            }
         }
 
         List<String> lines = reply
@@ -349,7 +372,7 @@ public class TicTacToeTest extends StageTest<Clue> {
 
         String lastLine = lines.get(lines.size() - 1);
 
-        if (! (lastLine.contains("X wins")
+        if (!(lastLine.contains("X wins")
             || lastLine.contains("O wins")
             || lastLine.contains("Draw")
         )) {
