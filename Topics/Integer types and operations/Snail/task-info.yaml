@@ -14,4 +14,8 @@ files:
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/2221#comment
 status: Failed
+feedback:
+  message: |
+    Failed test #10 of 20. Wrong answer
+  time: Thu, 13 May 2021 16:59:41 UTC
 record: -1
